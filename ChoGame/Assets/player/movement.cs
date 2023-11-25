@@ -9,7 +9,7 @@ public class movement : MonoBehaviour
 
         void Update()
     {
-        MovementSystem();
+        //MovementSystem();
     }
 
     void MovementSystem()
@@ -32,11 +32,21 @@ public class movement : MonoBehaviour
         }
     }
 
-    void moveFwrd(){transform.Translate(0,0,speed);}
+    private void LateUpdate()
+    {
+        MovementSystem();
+    }
 
-    void moveBkwrd(){transform.Translate(0,0,-speed);}
+    void moveFwrd(){ Move(new Vector3(0, 0, speed)); }
 
-    void moveLeft(){transform.Translate(-speed,0,0);}
+    void moveBkwrd(){ Move(new Vector3(0, 0, -speed)); }
 
-    void moveRight(){transform.Translate(speed,0,0);}
+    void moveLeft(){ Move(new Vector3(-speed, 0, 0)); }
+
+    void moveRight(){ Move(new Vector3(speed, 0, 0)); }
+
+    private void Move(Vector3 d)
+    {
+        transform.Translate(d * Time.deltaTime);
+    }
 }
